@@ -11,26 +11,42 @@
   <span>{{ item.price | currency }}</span>
 </div>
 
-<div *ngIf="totalAmount !== 0; ">
+<div *ngIf="totalOrderAmount !== 0">
   <div style="margin: 10px">
-    <span>Total amount : </span>
-    <span>{{ totalAmount | currency }}</span>
+    <span>Total order amount : </span>
+    <span>{{ totalOrderAmount | currency }}</span>
     <span><button style="background-color: red; float: right" (click)="clearCart()">Clear cart</button></span>
   </div>
 
-  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-    <div>
-      <label for="name">Name</label>
-      <input type="text" id="name" formControlName="name">
-    </div>
+  <app-shipping></app-shipping>
 
-    <div>
-      <label for="address">Adress</label>
-      <input type="text" id="address" formControlName="address">
-    </div>
+  <h4>Total amount : <b>{{ totalAmount | currency }}</b></h4>
 
-    <button class="button" type="submit">Purchase</button>
-  </form>
+  <mat-card>
+    <mat-card-header>User data</mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+        <div>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+          </mat-form-field>
+        </div>
+
+
+        <button mat-raised-button color="primary" type="submit">Purchase</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
 </div>
 

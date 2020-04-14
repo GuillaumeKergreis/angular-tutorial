@@ -10,8 +10,9 @@ import { CartService } from '../cart.service';
 })
 export class CartComponent implements OnInit {
   items: any;
-  totalAmount: number;
+  totalOrderAmount: number;
   checkoutForm;
+  totalAmount: number;
 
   constructor(
     private cartService: CartService,
@@ -25,19 +26,21 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
-    this.totalAmount = this.items.reduce((a, b) => a + b.price, 0);
+    this.totalOrderAmount = this.items.reduce((a, b) => a + b.price, 0);
+    this.cartService.getTotalAmount().subscribe(() => {
+       this.totalAmount = this.totalOrderAmount + this.cartService.shippingCosts.value;
+    });
   }
 
   clearCart(): void {
     this.items = this.cartService.clearCart();
-    this.totalAmount = 0;
+    this.totalOrderAmount = 0;
   }
 
   onSubmit(customerData): void {
+    console.warn('Your order has been submitted', customerData, this.items, 'Shipping : ' + this.cartService.shippingCosts.value);
     this.clearCart();
     this.checkoutForm.reset();
-
-    console.warn('Your order has been submitted', customerData);
   }
 
 }

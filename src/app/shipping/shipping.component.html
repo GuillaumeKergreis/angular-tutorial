@@ -1,6 +1,10 @@
-<h3>Shipping Prices</h3>
-
-<div class="shipping-item" *ngFor="let shipping of shippingCosts | async">
-  <span>{{ shipping.type }}</span>
-  <span>{{ shipping.price | currency }}</span>
-</div>
+<label id="example-radio-group-label">Shipping Prices</label>
+<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                 [(ngModel)]="chosenShippingCost" (ngModelChange)="onChosenShippingChange()" required>
+  <mat-radio-button class="example-radio-button shipping-item" *ngFor="let shipping of shippingCosts | async"
+                    [value]="shipping.price">
+    <span>{{ shipping.type }}</span>
+    <span>{{ shipping.price | currency }}</span>
+  </mat-radio-button>
+</mat-radio-group>
+<div>Your shipping costs are {{ chosenShippingCost | currency }}</div>

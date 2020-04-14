@@ -1,8 +1,6 @@
-<a [routerLink]="['/']">
-  <h1>My Store</h1>
-</a>
+<a mat-button style="color: white" id="logo" [routerLink]="['/']">My Store</a>
 
-<a [routerLink]="['/cart']" class="button fancy-button"><i class="material-icons">shopping_cart</i>Checkout</a>
+<a [routerLink]="['/cart']" class="button fancy-button" [matBadge]="itemNumber" mat-raised-button matBadgeColor="warn"><i class="material-icons">shopping_cart</i>Checkout</a>
 
 <!--
 Copyright Google LLC. All Rights Reserved.

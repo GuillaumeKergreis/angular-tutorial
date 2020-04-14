@@ -8,13 +8,19 @@ import { CartService } from '../cart.service';
 })
 export class ShippingComponent implements OnInit {
   shippingCosts;
+  chosenShippingCost: number;
 
   constructor(
     private cartService: CartService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.shippingCosts = this.cartService.getShippingPrices();
+  }
+
+  onChosenShippingChange(): void {
+    this.cartService.shippingCosts.next(this.chosenShippingCost);
   }
 
 }
